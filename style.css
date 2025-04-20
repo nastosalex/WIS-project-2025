@@ -1,0 +1,204 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes up full viewport height */
+}
+
+header {
+    background-color: #FFDE21;
+    color: #8B4513;
+    padding: 1rem;
+    display: flex;
+    align-items: center;            
+    justify-content: space-between;
+    position: relative;
+    gap:20px;
+}
+.logo {
+   
+    display: flex;
+    align-items: center;           
+    margin-left:10px;
+    
+}
+
+.logo img {
+    max-height: 100px;
+   
+}
+
+.site-name {
+    margin: 0;
+    font-size: 1.5em;
+    color: #8B4513;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-basis: 33.33%; 
+  
+    
+}
+
+
+.nav-links {
+    display: flex;
+   
+   
+}        
+.nav-area{
+    display: flex;
+    flex-basis: 33.33%;           
+    justify-content: flex-end;
+}  
+.nav-links nav{
+   
+    width:100%
+}
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #8B4513;
+    color: #FFDE21;
+    border: none;
+    border-radius: 5px;
+    
+}
+.header-content{
+    display: flex;            
+    width: 100%;
+    justify-content: space-between;
+    
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #8B4513;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.hero {
+    background-color: #f4f4f4;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.slideshow {
+    margin-bottom: 30px;
+}
+
+.slideshow img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.featured {
+    text-align: center;
+}
+
+.featured h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.featured p {
+    font-size: 1.1rem;
+}
+
+footer {
+    background-color: #FFDE21;
+    color: #fff;
+    
+    padding: 1rem 0;
+    margin-top: auto;
+    width: 100%;
+   
+}
+footer p{
+    text-align: center;
+    color: #8B4513;
+    
+}
+footer .team-names {
+    color: #8B4513; 
+}
+/* Responsive Styles */
+
+ @media (max-width: 536px) {
+        .header-content {
+            
+            justify-content: space-between;
+        }
+
+         .menu-toggle {
+            display: block;
+        }
+        .nav-links{
+            display: none;
+            flex-direction: column;
+            position: absolute;                    
+            top: 100%; /* Position below the header */
+            left: 0;
+            width: 100%;
+            background-color: #FFDE21;
+            text-align: left; /* Align text to the left */
+            
+            
+        }
+        .nav-links.active {
+            display: flex;
+            
+            text-align: left;
+            left:0;
+
+        }
+}
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .hero h2 {
+        font-size: 2.5rem;
+    } 
+    
+   
+}
+@media (max-width: 480px) {
+    .logo img {
+        max-height: 40px;
+    }
+}
