@@ -3,126 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My E-shop</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .hero {
-            background-color: #f4f4f4;
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .hero h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .slideshow {
-            margin-bottom: 30px;
-        }
-
-        .slideshow img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-        
-        .featured {
-            text-align: center;
-        }
-
-        .featured h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .featured p {
-            font-size: 1.1rem;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1rem 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            nav ul li {
-                display: block;
-                margin: 10px 0;
-            }
-
-            .hero h2 {
-                font-size: 2.5rem;
-            }
-        }
-    </style>
+    <title>PetPal-Pet Toys</title>
+    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <h1>My E-shop</h1>
-            <nav>
-                <ul>
-                    <li><a href="homepage.html">Αρχική</a></li>
-                    <li><a href="products.html">Προϊόντα</a></li>
-                </ul>
-            </nav>
+    <header >
+        <div class="header-content">             
+                 <div class="logo">
+                       <img src="images/Logo Image of store.png" alt="Logo">
+                 </div>             
+             <h1 class="site-name">PetPal</h1>
+             
+             <div class="nav-area">
+                  <div class="menu-toggle">&#9776;</div>
+                  <div class="nav-links">
+                        <nav><ul>
+                                   <li><a href="./homepage.html">Αρχική</a></li>
+                                   <li><a href="products.html">Προϊόντα</a></li>
+                             </ul>   
+                         </nav>
+                </div>
+
         </div>
+        <script>
+                const menuToggle = document.querySelector('.menu-toggle');
+                const navLinks = document.querySelector('.nav-links');
+                const container = document.querySelector(".container");
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    
+                   
+                });
+        </script>
     </header>
 
     <section class="hero">
         <div class="container">
-            <h2>Welcome to My E-shop</h2>
-            <div class="slideshow">
-                <img src="https://via.placeholder.com/800x400" alt="Product 1">
-                <!-- Add more images as needed -->
+            <h2>Καλώς Ήρθατε στο PetPal</h2>
+            <div class="slideshow"> 
+              <div class="slide">
+                <img src="images/image copy 2.png" alt="Product 1" class="slide-image">
+              </div>
+              <div class="slide">
+                <img src="images/image copy.png" alt="Product 2" class="slide-image">
+              </div> <div class="slide">
+                <img src="images/image.png" alt="Product 3" class="slide-image">
+              </div>
             </div>
         </div>
     </section>
@@ -136,7 +64,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2023 My E-shop. Developed by Team1, Team2</p>
+            <p>&copy; 2025 My E-shop. Developed by <span class="team-names">Anastasios, Konstantinos, Ilias</span></p>
         </div>
     </footer>
 
