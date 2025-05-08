@@ -1,0 +1,113 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Cursor Agent Rules for WIS Project 2025 – Pet Toy eShop
+
+These rules guide AI assistant behavior for building the Pet Toy eShop according to the project specification. Follow rules precisely and refer to existing files in the project.
+
+## Project Structure
+
+/wis-project-2025
+├── public/
+│ ├── homepage.html # existing early version
+│ ├── products.html # existing early version
+│ ├── style.css # existing early version
+│ ├── products.js # dynamic logic file (to be created)
+│ └── assets/images/ # image assets
+├── backend/
+│ └── app.py # Flask API
+├── docker/ # optional Dockerfiles and docker-compose
+├── README.md
+├── .gitignore
+└── cursor-rules.md # this rules file
+
+
+## General Principles
+
+1. Scope enforcement: Do not introduce frameworks or libraries outside those specified.
+2. Modularity: Keep frontend, backend, and JavaScript logic in separate files.
+3. Clarity: Use clear, semantic code and folder structure as outlined above.
+
+## Part A: Static Frontend (HTML/CSS)
+
+- Location: `/public/`
+- Files: `homepage.html`, `products.html`, `style.css`
+- Requirements:
+  - Header with logo and navigation links between pages
+  - Footer with team member names
+  - `homepage.html`: store name, image slideshow, optional promotional section
+  - `products.html`: search bar at top, product list grid (image, name, description)
+- Constraints:
+  - Use only HTML5 and CSS3
+  - Ensure responsiveness with media queries
+  - Do not use CSS frameworks or preprocessors
+
+## Part B: Backend API (Flask + MongoDB)
+
+- Location: `/backend/app.py`
+- Dependencies: `Flask`, `Flask-PyMongo`, `Flask-Cors`, `numpy`
+- Database: MongoDB collection `products`
+  - Fields per document: `name`, `photo`, `description`, `likes` (plus optional `price`)
+  - Create a text index on `name`
+
+### Endpoints
+
+1. **GET `/search?name=`**
+   - Perform text search on `name`
+   - If `name` is empty, return all products
+   - Sort multiple matches by `price` descending if `price` field exists
+   - Return JSON list (empty if no matches)
+
+2. **POST `/like`**
+   - Accept JSON `{ "id": "<product_id>" }`
+   - Increment `likes` of the specified product by 1
+   - Return updated product or status
+
+3. **GET `/popular-products`**
+   - Return top 5 products sorted by `likes` descending
+
+- Run the API on `http://127.0.0.1:5000`
+- Enable CORS with `Flask-Cors`
+- Store at least 20 products in the database
+
+## Part C: Dynamic Frontend (JavaScript)
+
+- Location: `/public/products.js`
+- Use vanilla JavaScript only
+- All requests use `fetch()`
+- Set header `Content-Type: application/json` for POST requests
+
+### Interactions
+
+1. **Search Input**  
+   - On form submit or keyup, send `GET /search?name=<query>`  
+   - Clear existing product elements, render results dynamically
+
+2. **Like Click**  
+   - On click of a product image element, send `POST /like` with `{ id }`  
+   - Optionally update the displayed like count
+
+3. **Homepage Slideshow**  
+   - On load of `homepage.html`, send `GET /popular-products`  
+   - Populate slideshow container with image and name for each product
+
+## Part D: Docker (Optional)
+
+- Place Dockerfiles and `docker-compose.yml` in `/docker/`
+- Provide three Dockerfiles:
+  1. Static server for `/public/`
+  2. Flask API
+  3. MongoDB (official image)
+
+## Commit and Collaboration
+
+- Use GitHub with branches per feature (`static`, `api`, `dynamic`)
+- Write concise commit messages, e.g.:
+  - `feat: add homepage layout`
+  - `fix: correct search endpoint response`
+  - `style: update product card spacing`
+
+Ensure all code changes respect these rules. If clarification is needed, reference this file or ask explicitly for PDF specifics.
+
