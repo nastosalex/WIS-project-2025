@@ -1,4 +1,4 @@
-/* Import Google Fonts */
+/* Εισαγωγή Γραμματοσειρών Google */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans:wght@400;500;700&display=swap');
 
 body {
@@ -8,7 +8,7 @@ body {
     line-height: 1.6;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensure body takes up full viewport height */
+    min-height: 100vh; /* Διασφάλιση ότι το body καταλαμβάνει όλο το ύψος της οθόνης */
     color: #333;
 }
 
@@ -240,7 +240,7 @@ footer .team-names::after {
             text-align: left;
             left:0;
 
-        }
+    }
 }
 @media (max-width: 768px) {
     nav ul li {

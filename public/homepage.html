@@ -10,7 +10,7 @@
     <header>
         <div class="header-content">             
             <div class="logo">
-                <img src="assets/images/logoNEW.png" alt="Logo">
+                <img src="assets/images/logoNEW.png">
             </div>             
             <h1 class="site-name">PetPal</h1>
             
@@ -37,15 +37,15 @@
             <div class="slideshow-container">
                 <div class="slideshow">
                     <div class="slide active">
-                        <img src="assets/images/image.png" alt="Interactive Ball" class="slide-image">
+                        <img src="assets/images/image.png" class="slide-image">
                         <div class="slide-caption">Interactive Ball - Έξυπνη μπάλα για σκύλους</div>
                     </div>
                     <div class="slide">
-                        <img src="assets/images/image.png" alt="Plush Mouse" class="slide-image">
+                        <img src="assets/images/image.png" class="slide-image">
                         <div class="slide-caption">Plush Mouse - Απαλό ποντίκι για γάτες</div>
                     </div>
                     <div class="slide">
-                        <img src="assets/images/image.png" alt="Chew Bone" class="slide-image">
+                        <img src="assets/images/image.png" class="slide-image">
                         <div class="slide-caption">Chew Bone - Δυνατό κόκαλο για σκύλους</div>
                     </div>
                 </div>
@@ -129,14 +129,14 @@
     </footer>
 
     <script>
-        // Menu Toggle
+        // Εναλλαγή Μενού
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
 
-        // Slideshow
+        // Παρουσίαση Διαφανειών
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
@@ -161,14 +161,14 @@
             showSlide(currentSlide - 1);
         }
 
-        // Event Listeners
+        // Ακροατές Συμβάντων
         prevButton.addEventListener('click', prevSlide);
         nextButton.addEventListener('click', nextSlide);
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => showSlide(index));
         });
 
-        // Auto slideshow
+        // Αυτόματη παρουσίαση διαφανειών
         setInterval(nextSlide, 5000);
     </script>
 </body>
