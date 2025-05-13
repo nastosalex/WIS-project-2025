@@ -13,11 +13,22 @@ app = Flask(__name__)
 CORS(app)
 
 # Ρύθμιση MongoDB
-app.config["MONGO_URI"] = os.getenv("MONGO_URI")
-mongo = PyMongo(app)
+mongo_uri = os.getenv("MONGO_URI")
+if not mongo_uri:
+    raise ValueError("MONGO_URI environment variable is not set")
+
+app.config["MONGO_URI"] = mongo_uri
+try:
+    mongo = PyMongo(app)
+    mongo.db.command('ping')
+except Exception as e:
+    raise ValueError(f"Error connecting to MongoDB: {str(e)}")
 
 # Create text index on name field
-mongo.db.products.create_index([("name", "text")])
+try:
+    mongo.db.products.create_index([("name", "text")])
+except Exception as e:
+    raise ValueError(f"Error creating index: {str(e)}")
 
 @app.route('/search', methods=['GET'])
 def search_products():
