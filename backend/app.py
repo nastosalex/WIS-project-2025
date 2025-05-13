@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 # Φόρτωση μεταβλητών περιβάλλοντος
 from pathlib import Path
 load_dotenv(dotenv_path=Path(__file__).parent / ".env")
-print("Φορτώθηκε το MONGO_URI:", os.getenv("MONGO_URI"))
 
 app = Flask(__name__)
 CORS(app)
@@ -64,7 +63,7 @@ def like_product():
         return jsonify(updated_product)
         
     except Exception as e:
-        return jsonify({"error": str(e)}), 400
+        return jsonify({"error": "An error occurred"}), 400
 
 @app.route('/popular-products', methods=['GET'])
 def get_popular_products():
@@ -77,4 +76,4 @@ def get_popular_products():
     return jsonify(products)
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(debug=False) 
