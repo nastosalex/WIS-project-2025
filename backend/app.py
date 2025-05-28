@@ -32,19 +32,28 @@ except Exception as e:
 
 @app.route('/search', methods=['GET'])
 def search_products():
-    query = request.args.get('name', '')
+    query = request.args.get('name', '').strip()
     
-    if query:
-        # Αναζήτηση κειμένου στο πεδίο ονόματος
-        products = list(mongo.db.products.find(
-            {"$text": {"$search": query}},
-            {"score": {"$meta": "textScore"}}
-        ).sort([("score", {"$meta": "textScore"}), ("price", -1)]))
-    else:
-        # Επιστροφή όλων των προϊόντων ταξινομημένα κατά τιμή
+    if not query:
+        # Return all products sorted by price if no query
         products = list(mongo.db.products.find().sort("price", -1))
+    else:
+        # First try exact match
+        exact_match = list(mongo.db.products.find(
+            {"name": {"$regex": f"^{query}$", "$options": "i"}}
+        ))
+        
+        if exact_match:
+            # If we found an exact match, return only that
+            products = exact_match
+        else:
+            # If no exact match, search for partial matches
+            products = list(mongo.db.products.find(
+                {"$text": {"$search": query}},
+                {"score": {"$meta": "textScore"}}
+            ).sort([("score", {"$meta": "textScore"}), ("price", -1)]))
     
-    # Μετατροπή του ObjectId σε string για JSON σειριοποίηση
+    # Convert ObjectId to string for JSON serialization
     for product in products:
         product['_id'] = str(product['_id'])
         if 'score' in product:

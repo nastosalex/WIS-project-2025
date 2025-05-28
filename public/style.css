@@ -622,3 +622,19 @@ footer .team-names::after {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
 }
+
+.product-likes {
+    margin-top: 10px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.product-likes.liked {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.product-likes:hover:not(.liked) {
+    color: #e74c3c;
+}
