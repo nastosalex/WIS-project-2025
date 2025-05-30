@@ -4,8 +4,8 @@ services:
   # Web Server (Nginx)
   web:
     build:
-      context: .
-      dockerfile: Dockerfile.web
+      context: ..
+      dockerfile: docker/Dockerfile.web
     ports:
       - "80:80"
     depends_on:
@@ -16,8 +16,8 @@ services:
   # Flask Backend
   flask:
     build:
-      context: .
-      dockerfile: Dockerfile.flask
+      context: ..
+      dockerfile: docker/Dockerfile.flask
     environment:
       - MONGO_URI=mongodb+srv://nastosalex4:JLcrIqGKuVww93Ld@cluster0.eknhq5k.mongodb.net/pettoyshop?retryWrites=true&w=majority&appName=Cluster0
     ports:
