@@ -4,6 +4,11 @@ from flask_cors import CORS
 from bson import ObjectId
 import os
 from dotenv import load_dotenv
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Φόρτωση μεταβλητών περιβάλλοντος
 from pathlib import Path
@@ -15,19 +20,32 @@ CORS(app)
 # Ρύθμιση MongoDB
 mongo_uri = os.getenv("MONGO_URI")
 if not mongo_uri:
+    logger.error("MONGO_URI environment variable is not set")
     raise ValueError("MONGO_URI environment variable is not set")
 
+logger.info("Attempting to connect to MongoDB...")
 app.config["MONGO_URI"] = mongo_uri
+
 try:
     mongo = PyMongo(app)
+    # Test the connection
     mongo.db.command('ping')
+    logger.info("Successfully connected to MongoDB!")
+    
+    # List all collections to verify database access
+    collections = mongo.db.list_collection_names()
+    logger.info(f"Available collections: {collections}")
+    
 except Exception as e:
+    logger.error(f"Error connecting to MongoDB: {str(e)}")
     raise ValueError(f"Error connecting to MongoDB: {str(e)}")
 
 # Create text index on name field
 try:
     mongo.db.products.create_index([("name", "text")])
+    logger.info("Successfully created text index on 'name' field")
 except Exception as e:
+    logger.error(f"Error creating index: {str(e)}")
     raise ValueError(f"Error creating index: {str(e)}")
 
 @app.route('/search', methods=['GET'])
@@ -95,5 +113,45 @@ def get_popular_products():
     
     return jsonify(products)
 
+@app.route('/test-db', methods=['GET'])
+def test_db():
+    try:
+        # Test connection
+        mongo.db.command('ping')
+        
+        # Get all collections
+        collections = mongo.db.list_collection_names()
+        
+        # Get sample data from each collection
+        data = {}
+        for collection in collections:
+            sample = list(mongo.db[collection].find().limit(1))
+            if sample:
+                # Convert ObjectId to string for JSON serialization
+                sample[0]['_id'] = str(sample[0]['_id'])
+            data[collection] = sample
+        
+        return jsonify({
+            "status": "success",
+            "message": "Successfully connected to MongoDB",
+            "collections": collections,
+            "sample_data": data
+        })
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": str(e)
+        }), 500
+
+@app.route('/test-products', methods=['GET'])
+def test_products():
+    try:
+        products = list(mongo.db.products.find())
+        for product in products:
+            product['_id'] = str(product['_id'])
+        return jsonify({"products": products})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 if __name__ == '__main__':
-    app.run(debug=False) 
+    app.run(host='0.0.0.0', debug=False) 

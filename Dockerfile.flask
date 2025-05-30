@@ -16,7 +16,6 @@ COPY backend/ .
 # Set environment variables
 ENV FLASK_APP=app.py
 ENV FLASK_ENV=production
-ENV MONGO_URI=mongodb://mongodb:27017/wis_shop
 
 # Expose port 5000
 EXPOSE 5000
