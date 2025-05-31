@@ -119,7 +119,7 @@ function createProductCard(product) {
     const likeButtonClass = hasLiked ? 'liked' : '';
 
     card.innerHTML = `
-        <img src="${product.image || 'assets/images/image.png'}" alt="${product.name}">
+        <img src="${product.photo || 'assets/images/image.png'}" alt="${product.name}">
         <h3>${product.name}</h3>
         <p>${product.description}</p>
         <div class="product-likes ${likeButtonClass}">
