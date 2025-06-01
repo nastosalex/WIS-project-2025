@@ -27,11 +27,16 @@ function updateSlideshow(products) {
 
     // Create new slides and dots
     products.forEach((product, index) => {
+        // Handle image path
+        const imagePath = product.photo 
+            ? (product.photo.startsWith('assets/') ? product.photo : `assets/images/${product.photo}`)
+            : 'assets/images/image.png';
+
         // Create slide
         const slide = document.createElement('div');
         slide.className = `slide ${index === 0 ? 'active' : ''}`;
         slide.innerHTML = `
-            <img src="${product.image || 'assets/images/image.png'}" class="slide-image" alt="${product.name}">
+            <img src="${imagePath}" class="slide-image" alt="${product.name}">
             <div class="slide-caption">${product.name} - ${product.description}</div>
         `;
         slideshow.appendChild(slide);

@@ -118,8 +118,13 @@ function createProductCard(product) {
     const hasLiked = hasLikedProduct(product._id);
     const likeButtonClass = hasLiked ? 'liked' : '';
 
+    // Handle image path
+    const imagePath = product.photo 
+        ? (product.photo.startsWith('assets/') ? product.photo : `assets/images/${product.photo}`)
+        : 'assets/images/image.png';
+
     card.innerHTML = `
-        <img src="${product.photo || 'assets/images/image.png'}" alt="${product.name}">
+        <img src="${imagePath}" alt="${product.name}">
         <h3>${product.name}</h3>
         <p>${product.description}</p>
         <div class="product-likes ${likeButtonClass}">
