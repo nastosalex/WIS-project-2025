@@ -1,24 +1,24 @@
-# Use Python 3.9 as base image
+# Χρήση Python 3.9 ως base image
 FROM python:3.9-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy requirements first to leverage Docker cache
+# Αντιγραφή του αρχείου requirements.txt πρώτα για καλύτερη χρήση του Docker cache
 COPY backend/requirements.txt .
 
-# Install dependencies
+# Εγκατάσταση των απαιτούμενων πακέτων 
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application
+# Αντιγραφή του υπόλοιπου κώδικα της εφαρμογής
 COPY backend/ .
 
-# Set environment variables
+# Ορισμός μεταβλητών περιβάλλοντος 
 ENV FLASK_APP=app.py
 ENV FLASK_ENV=production
 
-# Expose port 5000
+# Εκθέτουμε τη θύρα 5000 για το Flask server
 EXPOSE 5000
 
-# Run the application
+# Εκτέλεση της εφαρμογής
 CMD ["python", "app.py"] 
